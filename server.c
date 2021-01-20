@@ -3,6 +3,7 @@
 #include "sys/stat.h"
 #include <fcntl.h>
 #include <wait.h>
+
 enum TYPES_CONNECTION {SERV, CLI};
 
 typedef struct worker_data { // for sending and receiving
@@ -233,6 +234,8 @@ void server(char* ip, int port, int delay_sleep, int common_storage) {
             arg->common_storage = common_storage;
             create_worker(c_sockfd, arg);
             close_conn(c_sockfd, &arg);
+        } else {
+            sleep(1);
         }
         update_stats(0);
     }

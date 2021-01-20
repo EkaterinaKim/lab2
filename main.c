@@ -136,6 +136,11 @@ void parser( int argc, char **argv ) {
         opt = getopt( argc, argv, optString );
     } while( opt != -1 );
 
+#ifndef SERVER // то есть это не сервер = клиент
+        if (!globalArgs.message) // то есть пустое
+        display_usage("No message specified!");
+#endif
+
     if (!globalArgs.ipaddr || !globalArgs.ipport || !inet_aton(globalArgs.ipaddr,0))
         display_usage("Address and port is required options and must be valid");
 
